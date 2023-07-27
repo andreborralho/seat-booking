@@ -1,0 +1,46 @@
+@import 'variables'
+
+#seats
+
+  .seat
+    border-radius: 25px
+    border: 1px solid transparent
+    background-color: $green-color
+    width: 15px
+    height: 15px
+
+    &:hover
+      cursor: pointer
+      background-color: $gray-color
+
+    &.selected
+      background-color: $light-red-color
+
+      &.own-selected
+        background-color: $gray-color
+
+    &.reserved
+      background-color: $dark-red-color
+
+  form.button_to
+    height: 17px
+
+  button
+    border: none
+    background: none
+    padding: 0
+
+.tooltip
+
+  &:hover .tooltip-text
+    display: inline
+    opacity: 1
+
+  .tooltip-text
+    display: none
+    opacity: 0
+    position: absolute
+    background: white
+    padding: 3px
+    box-shadow: 1px 1px 1px $gray-color
+    transition: visibility 0s, opacity 0.3s

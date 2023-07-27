@@ -1,0 +1,21 @@
+= turbo_stream_from :seats
+
+%div{ data: { controller: "seat" } }
+  %table#seats
+    %tbody
+      - seat_grid = Array.new(@seats[:maxY]) { Array.new(@seats[:maxX]) }
+      - @seats[:all].each do |seat|
+        - seat_grid[seat.positionY][seat.positionX] = seat
+      - seat_grid.each do |row|
+        %tr
+          - row.each do |seat|
+            %td
+              - if seat
+                = render seat, reservation: @seats[:reservation]
+
+  .sidebar
+    %h2 Shopping Cart
+    #cart
+    #total
+      %span Total:
+      %span#total-amount{ data: { seat: { target: 'total' } } }
