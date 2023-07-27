@@ -5,7 +5,7 @@ class LoadSeatsInteractor
 
   def call
     reservation = Reservation.find_or_create_by(session_id: @session_id)
-    reservation.seats.update_all(status: Seat.statuses[:free])
+    reservation.seats.where(status: Seat.statuses[:selected]).update_all(status: Seat.statuses[:free])
     reservation.seats.delete_all
     seats = Seat.all.includes(:reservation)
 

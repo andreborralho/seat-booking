@@ -14,16 +14,30 @@
  *= require_self
  */
 
+@import 'variables'
+
 .container
     display: flex
 
+    > div
+        margin: 0 auto
+
 .sidebar
     width: 220px
-    padding: 20px
-    background-color: #f1f1f1
+    padding: 10px
+    background-color: $green-color
+    border-radius: 5px
+    margin: 30px auto
+    text-align: center
 
-.sidebar h2
-    margin-bottom: 10px
+    h2
+        margin-bottom: 10px
+
+    button
+        padding: 5px 20px
+        font-size: 16px
+        cursor: pointer
+        margin-top: 20px
 
 #cart
     margin-bottom: 20px

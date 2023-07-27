@@ -11,11 +11,15 @@
           - row.each do |seat|
             %td
               - if seat
-                = render seat, reservation: @seats[:reservation]
+                = render seat
 
   .sidebar
-    %h2 Shopping Cart
-    #cart
+    %h2 Buy Tickets
+
+    %div
+      %span#total-seats{ data: { seat: { target: 'quantity' } } }
+      %span selected seats
     #total
       %span Total:
-      %span#total-amount{ data: { seat: { target: 'total' } } }
+      %span#total-amount{ data: { seat: { target: 'price' } } }
+    = button_to 'Buy', update_multiple_seats_path, method: :post

@@ -8,16 +8,11 @@ class SeatsController < ApplicationController
 
   def update
     interactor = UpdateSeatInteractor.new(session.id, params[:id])
-    result = interactor.call
-
-    render json: result
+    interactor.call
   end
 
   def update_multiple
-    seat_ids = params[:seat_ids]
-    interactor = ReserveSeatsInteractor.new(seat_ids, session.id)
-    result = interactor.call
-
-    render json: result
+    interactor = ReserveSeatsInteractor.new(session.id)
+    interactor.call
   end
 end

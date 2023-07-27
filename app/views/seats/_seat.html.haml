@@ -1,4 +1,4 @@
 = turbo_frame_tag(dom_id seat) do
-  = button_to seat_path(seat), method: :patch, disabled: seat.reserved?, class: 'tooltip' do
-    .seat{ class: "#{seat_css_class(seat, reservation)}", data: { price: seat.price, action: "click->seat#selectSeat" } }
+  = button_to seat_path(seat), method: :patch, disabled: !seat.free?, class: 'tooltip' do
+    .seat{ class: seat.status, data: { id: seat.id, price: seat.price, action: "click->seat#selectSeat" } }
     %span.tooltip-text= number_to_currency(seat.price, unit: '€', precision: 2)
