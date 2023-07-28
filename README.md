@@ -2,8 +2,8 @@
 
 The setups steps expect following tools installed on the system.
 
-- Ruby [3.2.2](https://github.com/organization/project-name/blob/master/.ruby-version#L1)
-- Rails [7.0.6](https://github.com/organization/project-name/blob/master/Gemfile#L12)
+- Ruby [3.2.2]
+- Rails [7.0.6]
 
 ##### 1. Check out the repository
 
@@ -11,15 +11,7 @@ The setups steps expect following tools installed on the system.
 git clone git@github.com:andreborralho/seat-booking.git
 ```
 
-##### 2. Create database.yml file
-
-Copy the sample database.yml file and edit the database configuration as required.
-
-```bash
-cp config/database.yml.sample config/database.yml
-```
-
-##### 3. Create and setup the database
+##### 2. Create and setup the database
 
 Run the following commands to create and setup the database.
 
@@ -29,7 +21,7 @@ bundle exec rake db:setup
 bundle exec rake db:seed
 ```
 
-##### 4. Start the Rails server
+##### 3. Start the Rails server
 
 You can start the rails server using the command given below.
 

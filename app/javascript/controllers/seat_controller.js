@@ -1,7 +1,7 @@
 import { Controller } from "@hotwired/stimulus"
 
 export default class extends Controller {
-  static targets = ["seat", "price", "quantity"];
+  static targets = ['seat', 'price', 'quantity'];
 
   connect() {
     this.selectedSeats = [];
@@ -13,8 +13,7 @@ export default class extends Controller {
     document.removeEventListener('turbo:before-stream-render', this.afterStreamRender);
   }
 
-  afterStreamRender = (event) => {
-    console.log(event)
+  afterStreamRender = () => {
     const seatElements = this.element.querySelectorAll('.own-selected .seat.selected');
     console.log(seatElements);
 
@@ -22,7 +21,6 @@ export default class extends Controller {
       const buttonElement = seatElement.closest('button');
       buttonElement.removeAttribute('disabled');
     });
-
   }
 
   selectSeat(event) {

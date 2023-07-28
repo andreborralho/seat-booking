@@ -1,6 +1,6 @@
 = turbo_stream_from :seats
 
-%div{ data: { controller: "seat" } }
+%div{ data: { controller: 'seat' } }
   %table#seats
     %tbody
       - seat_grid = Array.new(@seats[:maxY]) { Array.new(@seats[:maxX]) }
@@ -22,4 +22,4 @@
     #total
       %span Total:
       %span#total-amount{ data: { seat: { target: 'price' } } }
-    = button_to 'Buy', update_multiple_seats_path, method: :post
+    = button_to 'Buy', update_multiple_seats_path, method: :post, form: { data: { action: 'turbo:submit-end->seat#clearTotals' } }
