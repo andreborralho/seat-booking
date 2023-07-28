@@ -6,17 +6,21 @@ export default class extends Controller {
   connect() {
     this.selectedSeats = [];
     this.calculateTotal();
-    document.addEventListener('turbo:before-stream-render', this.afterStreamRender);
+    document.addEventListener('turbo:before-stream-render', this.handleBeforeStreamRender.bind(this));
   }
 
   disconnect() {
-    document.removeEventListener('turbo:before-stream-render', this.afterStreamRender);
+    document.removeEventListener('turbo:before-stream-render', this.handleBeforeStreamRender.bind(this));
   }
 
-  afterStreamRender = () => {
-    const seatElements = this.element.querySelectorAll('.own-selected .seat.selected');
-    console.log(seatElements);
+  handleBeforeStreamRender(event) {
+    event.preventDefault();
+    event.detail.newStream.performAction();
+    this.afterStreamRender();
+  }
 
+  afterStreamRender() {
+    const seatElements = this.element.querySelectorAll('.own-selected button');
     seatElements.forEach((seatElement) => {
       const buttonElement = seatElement.closest('button');
       buttonElement.removeAttribute('disabled');
@@ -24,13 +28,14 @@ export default class extends Controller {
   }
 
   selectSeat(event) {
-    const seat = event.currentTarget;
-    if (seat.closest('td').classList.contains("own-selected")) {
+    const seat = event.currentTarget.querySelector('.seat');
+    if (seat.closest('td').classList.contains('own-selected')) {
+      seat.closest('td').classList.remove('own-selected');
       this.selectedSeats = this.selectedSeats.filter(
         (selectedSeat) => selectedSeat.dataset.id !== seat.dataset.id
       );
     } else {
-      seat.closest('td').classList.add("own-selected");
+      seat.closest('td').classList.add('own-selected');
       this.selectedSeats.push(seat);
     }
     this.calculateTotal();
@@ -49,5 +54,10 @@ export default class extends Controller {
   clearTotals() {
     this.priceTarget.textContent = '0.00 €';
     this.quantityTarget.textContent = '0';
+    const elements = this.element.querySelectorAll('.own-selected');
+    elements.forEach((element) => {
+      element.classList.remove('own-selected');
+    });
+    this.selectedSeats = [];
   }
 }
